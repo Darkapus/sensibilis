@@ -1,0 +1,37 @@
+<head>
+    <meta charset="utf-8"/>
+    
+	<!-- Latest compiled and minified JavaScript -->
+	<meta name="robots" content="noodp"/>
+	<meta name="generator" content="Sensibilis CMS beta" />
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name=viewport content="width=device-width, initial-scale=1">
+	
+	<link rel="stylesheet" href="/static/css/bootstrap.min.css" media='all'>
+	<link rel="stylesheet" href="/static/css/main.css" media='all'>
+	<link rel="icon" type="image/ico" href="/favicon.ico" />
+	
+	<meta itemprop="name" content="{{ title }}">
+	{% if description %}<meta itemprop="description" content="{{ description }}"><meta name="description" content="{{ description }}" />{% endif %}
+	{% if image %}<meta itemprop="image" content="{{ image }}">{% endif %}
+    
+    <title>{{ title }}</title>
+    
+    <!-- Latest compiled and minified CSS -->
+	<link rel="canonical" href="{{ url }}" />
+	<link rel="alternate" href="{{ url }}" hreflang="fr" />
+	<link rel="profile" href="http://gmpg.org/xfn/11" />
+	
+	<script type="application/ld+json">
+	{
+	  "@context": "http://schema.org",
+	  "@type": "Person",
+	  "name": "Benjamin BASCHET",
+	  "homeLocation": "Noisiel - Région parisienne",
+	  "jobTitle": "Team Leader Développeur / Chef de projet technique",
+	  "url": "https://benjamin.baschet.fr"
+	}
+	</script>
+	
+	{% if highlight %}<link rel="stylesheet" href="/static/css/highlight.min.css" media="all"><script src="/static/js/highlight.min.js"></script>{% endif %}
+</head>

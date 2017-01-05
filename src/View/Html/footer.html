@@ -1,0 +1,34 @@
+<footer>
+	{% if author %}
+	Tags : 
+	{% for tag in tags %}
+		<a href="/tag/{{tag}}"><span class="label label-primary">{{tag}}</span></a> 
+	{% endfor %}
+	<hr>
+	{% if showMarkdown %}
+	<pre>{{ markdown }}</pre>
+	{% endif %}
+	<hr>
+	{% endif %}
+	{% if disqus == true %}
+	<script id="dsq-count-scr" src="//benjaminbaschet.disqus.com/count.js" async></script>
+	<div id="disqus_thread"></div>
+	<script>
+	    var disqus_config = function () {
+	        this.page.url = "{{ url }}"; 
+	        this.page.identifier = "{{ identifier }}"; 
+	    };
+	    
+	    (function() {  
+	        var d = document, s = d.createElement('script');
+	        
+	        s.src = '//sensibilis.disqus.com/embed.js';
+	        
+	        s.setAttribute('data-timestamp', +new Date());
+	        (d.head || d.body).appendChild(s);
+	    })();
+	</script>
+	<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+	{% endif %}	
+
+</footer>
