@@ -1,15 +1,16 @@
 <footer>
-	{% if author %}
+	{% if tags %}
 	Tags : 
 	{% for tag in tags %}
 		<a href="/tag/{{tag}}"><span class="label label-primary">{{tag}}</span></a> 
 	{% endfor %}
 	<hr>
+	{% endif %}
 	{% if showMarkdown %}
 	<pre>{{ markdown }}</pre>
 	{% endif %}
 	<hr>
-	{% endif %}
+	
 	{% if disqus == true %}
 	<script id="dsq-count-scr" src="//benjaminbaschet.disqus.com/count.js" async></script>
 	<div id="disqus_thread"></div>

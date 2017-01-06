@@ -22,16 +22,19 @@
 	</div><!-- /.container-fluid -->
 	</nav>
 	<article class="container">
+		{% if path %}
 		<ol class="breadcrumb">
+			
 		</ol>
+		{% endif %}
 		<div class="col-md-12" id="content">
 			<header>
 				<h1>{{ title }}</h1>
-				{% markdown %}{{ content }}{% endmarkdown %}
-				
 				{% if author %}
 					<em>Par {{author}}</em>
 				{% endif %}
+				<hr>
+				{{ content|raw }}
 			</header>
 
 			{{ include('footer.html') }}

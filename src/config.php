@@ -1,3 +1,4 @@
 <?php
-define('MARKDOWN_PATH'	, 'src/View/Markdown');
-define('HTML_PATH'		, 'src/View/Html');
+define('ADMIN_PATH'		, '/admin/');
+define('MARKDOWN_PATH'	, __DIR__.'/View/Markdown');
+define('HTML_PATH'		, __DIR__.'/View/Html');

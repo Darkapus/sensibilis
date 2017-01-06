@@ -8,9 +8,9 @@ $container = $app->getContainer();
 // view renderer
 $container['renderer'] = function ($c) {
     $settings = $c->get('settings')['renderer'];
-    $engine = new MarkdownEngine\MichelfMarkdownEngine();
+    //$engine = new MarkdownEngine\MichelfMarkdownEngine();
     $twig = new Slim\Views\Twig($settings['template_path']);
-    $twig->addExtension(new MarkdownExtension($engine));
+    //$twig->addExtension(new MarkdownExtension($engine));
     return $twig;
 };
 

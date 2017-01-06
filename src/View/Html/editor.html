@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html lang="fr-FR" xmlns="http://www.w3.org/1999/xhtml" itemtype="http://schema.org/Article">
+	<head>
+		
+		<script src="/static/js/jquery-3.1.1.min.js"></script>
+	</head>
+	<body>
+
+<form class="main-content" method="POST" action="{{ constant('ADMIN_PATH') }}edit">
+
+<textarea id="content" name="content">{{ markdown }}</textarea>
+
+<input type="submit" value="save">
+</form>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+<link rel="stylesheet" href="/static/simplemde/dist/simplemde.min.css">
+<script src="/static/simplemde/dist/simplemde.min.js"></script>
+<script>
+	new SimpleMDE({
+		element: document.getElementById("content"),
+		spellChecker: false,
+	});
+	
+	</script>
+
+	</body>
+</html>
