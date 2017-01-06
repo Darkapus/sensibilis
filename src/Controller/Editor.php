@@ -13,7 +13,11 @@ class Editor
    }
    
    public function form(Request $request, Response $response, $args){
-   		$this->app->view->render($response, 'editor.html', \Sensibilis\Model\Service\Markdown::parseToArgs(file_get_contents(MARKDOWN_PATH.$request->getParam('path', HOME_PATH).'.md')));
+   		$args = \Sensibilis\Model\Service\Markdown::parseToArgs(file_get_contents(MARKDOWN_PATH.$request->getParam('path', HOME_PATH).'.md'));
+   		if(!$args['markdown']){
+   			$args['markdown'] = '---'.PHP_EOL.'path: '.$request->getParam('path').PHP_EOL.PHP_EOL.'---';
+   		}
+   		$this->app->view->render($response, 'editor.html', $args);
    		return $response;
    }
    
