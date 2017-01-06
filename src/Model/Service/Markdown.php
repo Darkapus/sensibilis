@@ -6,6 +6,26 @@ class Markdown{
 		return \Michelf\MarkdownExtra::defaultTransform($md);
 	}
 	
+	public static function getDirFiles($dir, &$results = array()){
+	    $files = scandir($dir);
+	
+	    foreach($files as $key => $value){
+	        $path = realpath($dir.DIRECTORY_SEPARATOR.$value);
+	        if(!is_dir($path)) {
+	            $results[] = $path;
+	        } else if($value != "." && $value != "..") {
+	            self::getDirFiles($path, $results);
+	            $results[] = $path;
+	        }
+	    }
+
+	    return $results;
+	}
+	
+	public static function listAll(){
+		return self::getDirFiles(MARKDOWN_PATH);
+	}
+	
 	public static function parseToArgs($md){
 		$args = [];
     	
@@ -33,26 +53,22 @@ class Markdown{
 	    	}
 	    	
 	    	$row = trim($row);
-	    	if(substr($row,0,1)=='-' && isset($key)) {
+	    	
+	    	$pos = strpos($row, ':');
+	    	
+	    	if($pos !==false) {
+		    	$key = trim(substr($row,0,$pos));
+		    	$value = trim(substr($row,$pos+1));	
+		    
+		    	if(!$value)	$value = [];
+		    	if($value == 'true') $value = true;
+	    		if($value == 'false') $value = true;
+	    		
+	    		$args[$key] = $value;
+	    	}
+	    	elseif(substr($row,0,1)=='-' && isset($key)) {
 	    		$args[$key][] = trim(substr($row,1));
 	    		continue;
-	    	}
-	    	
-	    	$explode = explode(':', $row);
-	    	list($key, $value) = $explode;
-	    	
-	    	$key = trim($key);
-	    	
-	    	$value = trim($value);
-	    	
-	    	if($value == 'true') $value = true;
-	    	if($value == 'false') $value = true;
-	    	
-	    	if(!$value){
-	    		$args[$key] = [];
-	    	}
-	    	else{
-	    		$args[$key] = $value;
 	    	}
 	    }
 	    

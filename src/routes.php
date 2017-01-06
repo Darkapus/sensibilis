@@ -3,39 +3,18 @@ use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
 
 $app->get('/', function (Request $request, Response $response, $args) {
-	
-    return $this->renderer->render($response, 'article.html', \Sensibilis\Model\Service\Markdown::parseToArgs(file_get_contents(MARKDOWN_PATH . '/home.md')));
+    return $this->view->render($response, 'article.html', \Sensibilis\Model\Service\Markdown::parseToArgs(file_get_contents(MARKDOWN_PATH . HOME_PATH . '.md')));
 });
 
 
 // outils de gestion de contenu md
-$app->get(ADMIN_PATH.'edit'		, function (Request $request, Response $response, $args) {
-	
-	if($path = $request->getParam('path', null)){
-		$path = $path.'.md';
-	}
-	
-	return $this->renderer->render($response, 'editor.html', \Sensibilis\Model\Service\Markdown::parseToArgs(file_get_contents(MARKDOWN_PATH.$path)));
-});
-$app->post(ADMIN_PATH.'edit'		, function (Request $request, Response $response, $args) {
-	$content = $request->getParam('content');
-	$args = \Sensibilis\Model\Service\Markdown::parseToArgs($content);
-	
-	// recursive directory creation
-	$path = $args['path'];
-	
-	if($path){
-		mkdir(MARKDOWN_PATH.$path, 0777, true);
-	}
-	
-	// create md content not deployed
-	header('Location: '.ADMIN_PATH.'edit?path='.$args['path']);
-	file_put_contents(MARKDOWN_PATH.$path.'.md', $content);
-	
-	exit;
-});
+$app->get(ADMIN_PATH.'edit'			, '\Sensibilis\Controller\Editor:form');
+$app->post(ADMIN_PATH.'edit'		, '\Sensibilis\Controller\Editor:save');
+
+$app->get(ADMIN_PATH.'html'		, '\Sensibilis\Controller\Deployer:html');
+
 $app->get(ADMIN_PATH.'sitemap'	, '\Sensibilis\Controller\Deployer:todo');
-$app->get(ADMIN_PATH.'html'		, '\Sensibilis\Controller\Deployer:todo');
+
 $app->get(ADMIN_PATH.'md'			, '\Sensibilis\Controller\Deployer:todo');
 $app->get(ADMIN_PATH.'tags'		, '\Sensibilis\Controller\Deployer:todo');
 $app->get(ADMIN_PATH.'categories'	, '\Sensibilis\Controller\Deployer:todo');

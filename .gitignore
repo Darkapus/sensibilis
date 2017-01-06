@@ -1,3 +1,5 @@
 vendor
 composer.lock
 phoenix.ico
+static/html/
+src/View/Cache/

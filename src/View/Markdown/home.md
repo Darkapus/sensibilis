@@ -1,9 +1,9 @@
 ---
-title: Sensibilis - Static CMS - Markdown Online edition
+title: Sensibilis - Static Flexible CMS - Markdown Online edition
 author: Benjamin Baschet
 forkme: https://github.com/Darkapus/sensibilis
 showMarkdown: true
-path: home
+path: /home
 tags:
 	- Home
 	- CMS

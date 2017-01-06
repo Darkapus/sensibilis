@@ -6,6 +6,7 @@ return [
         // Renderer settings
         'renderer' => [
             'template_path' => __DIR__ . '/View/Html/',
+            'template_cache' => __DIR__ . '/View/Cache/',
         ],
 
         // Monolog settings
