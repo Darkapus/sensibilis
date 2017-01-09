@@ -13,17 +13,24 @@ class Editor
    }
    
    public function form(Request $request, Response $response, $args){
-   		$args = \Sensibilis\Model\Service\Markdown::parseToArgs(file_get_contents(MARKDOWN_PATH.$request->getParam('path', HOME_PATH).'.md'));
+   		\Sensibilis\Model\Service\Site::requireConfiguration($args);
+   		
+   		$args = array_merge($args, \Sensibilis\Model\Service\Markdown::parseToArgs(file_get_contents(MARKDOWN_PATH.$request->getParam('path', HOME_PATH).'.md')));
+   		
    		if(!$args['markdown']){
-   			$args['markdown'] = '---'.PHP_EOL.'path: '.$request->getParam('path').PHP_EOL.PHP_EOL.'---';
+   			$args['markdown'] = '---'.PHP_EOL.'draft: true'.PHP_EOL.'path: '.$request->getParam('path').PHP_EOL.'site: '.$args['site'].PHP_EOL.PHP_EOL.'---';
    		}
+   		
+   		$args['sites'] = \Sensibilis\Model\Service\Site::listConfiguration();
    		$this->app->view->render($response, 'editor.html', $args);
    		return $response;
    }
    
    public function save(Request $request, Response $response, $args){
-	   	$content = $request->getParam('content');
+   		$content = $request->getParam('content');
 		$args = \Sensibilis\Model\Service\Markdown::parseToArgs($content);
+		
+		\Sensibilis\Model\Service\Site::requireConfiguration($args);
 		
 		// recursive directory creation
 		$path = $args['path'];
@@ -33,7 +40,7 @@ class Editor
 		}
 		
 		// create md content not deployed
-		header('Location: '.ADMIN_PATH.'edit?path='.$path);
+		header('Location: '.$_SERVER['HTTP_REFERER']);
 		file_put_contents(MARKDOWN_PATH.$path.'.md', $content);
 		return $response;
    }

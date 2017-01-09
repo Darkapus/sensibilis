@@ -2,10 +2,39 @@
 <html lang="fr-FR" xmlns="http://www.w3.org/1999/xhtml" >
     {{ include('head.html') }}
     <body>
-    	<form method="POST">
-    		<input type="text" name="login">
-    		<input type="password" name="password">
-    		<input type="submit">
-    	</form>
+    	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title" id="myModalLabel">Modal login</h4>
+		      </div>
+		      <div class="modal-body" >
+		        <form method="POST" id="loginForm">
+		        	<div class="form-group">
+		        		<label>Login</label>
+		    			<input class="form-control" type="text" name="login">
+		    		</div>
+		    		<div class="form-group">
+		    			<label>Password</label>
+		    			<input class="form-control" type="password" name="password">
+		    		</div>
+		    		
+		    	</form>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		        <button type="button" class="btn btn-primary" onclick="$('#loginForm').submit()">Login</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+    	
+    	
+    	<script>
+    	$(document).ready(function(){
+    		$('#myModal').modal()
+		});
+    	</script>
     </body>
 </html>

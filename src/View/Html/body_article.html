@@ -24,7 +24,11 @@
 	<article class="container">
 		{% if path %}
 		<ol class="breadcrumb">
-			
+		{% for p in path|split('/') %}
+		{% if author %}
+		<li><a href="#">{{ p }}</a></li>
+		{% endif %}
+		{% endfor %}
 		</ol>
 		{% endif %}
 		<div class="col-md-12" id="content">

@@ -1,21 +1,50 @@
 <!DOCTYPE HTML>
 <html lang="fr-FR" xmlns="http://www.w3.org/1999/xhtml" itemtype="http://schema.org/Article">
-	<head>
-		
-		<script src="/static/js/jquery-3.1.1.min.js"></script>
-	</head>
+	{{ include('head.html') }}
 	<body>
-
-<form class="main-content" method="POST" action="{{ constant('ADMIN_PATH') }}edit">
-
-<textarea id="content" name="content">{{ markdown }}</textarea>
-
-<input type="submit" value="save">
-</form>
-
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
-<link rel="stylesheet" href="/static/simplemde/dist/simplemde.min.css">
-<script src="/static/simplemde/dist/simplemde.min.js"></script>
+		<nav class="navbar navbar-default navbar-fixed-top">
+		<div class="container-fluid">
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<div class="container">
+				<div class="navbar-header">
+		            <a class="logo-top" href="/" data-toggle="tooltip" data-placement="bottom" title="Sensibilis"><img src="/static/image/phoenix.png" width="50" alt="Sensibilis"/></a>
+		        </div>
+				<ul class="nav navbar-nav">
+					<li><a href="#" onclick="$('form').submit()">Save</a></li>
+					<li><a href="{{ constant('SITE_URL') }}{{ path }}">See</span></a></li>
+					<li><a href="#" onclick="$.ajax({url:'{{ constant('ADMIN_PATH') }}html'})">Deploy</span></a></li>
+					<li class="dropdown"><a type="button" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					    Manage <span class="caret"></span>
+					  </a>
+					  <ul class="dropdown-menu">
+					  	{% for confsite in sites %}
+					    <li><a href="#">{{ confsite }}</a></li>
+					    {% endfor %}
+					  </ul>
+					</li>
+				</ul>
+				<form class="navbar-form">
+					
+				</form>
+			</div>
+	      	</div><!-- /.navbar-collapse -->
+		</div><!-- /.container-fluid -->
+		</nav>
+		<div class="container">
+			
+			<article class="container">
+			<form class="main-content" method="POST" action="{{ constant('ADMIN_PATH') }}edit">
+			
+			<textarea id="content" name="content">{{ markdown }}</textarea>
+			
+			</form>
+			
+			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+			<link rel="stylesheet" href="/static/simplemde/dist/simplemde.min.css">
+			<script src="/static/simplemde/dist/simplemde.min.js"></script>
+			</article>
+			
+		</div>
 <script>
 	new SimpleMDE({
 		element: document.getElementById("content"),

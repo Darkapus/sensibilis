@@ -44,6 +44,8 @@ class Markdown{
 	    	
 	    	if(trim($row) =='---') {
 	    		$stop++;
+	    		
+	    		if($stop<=1)
 	    		continue;
 	    	}
 	    	
@@ -61,8 +63,8 @@ class Markdown{
 		    	$value = trim(substr($row,$pos+1));	
 		    
 		    	if(!$value)	$value = [];
-		    	if($value == 'true') $value = true;
-	    		if($value == 'false') $value = true;
+		    	if($value === 'true') $value = true;
+	    		if($value === 'false') $value = false;
 	    		
 	    		$args[$key] = $value;
 	    	}

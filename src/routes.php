@@ -9,9 +9,12 @@ $app->get('/', function (Request $request, Response $response, $args) {
 
 // outils de gestion de contenu md
 $app->get(ADMIN_PATH.'edit'			, '\Sensibilis\Controller\Editor:form');
+$app->get(ADMIN_PATH.'{site}/edit'			, '\Sensibilis\Controller\Editor:form');
 $app->post(ADMIN_PATH.'edit'		, '\Sensibilis\Controller\Editor:save');
+$app->post(ADMIN_PATH.'{site}/edit'		, '\Sensibilis\Controller\Editor:save');
 
-$app->get(ADMIN_PATH.'html'		, '\Sensibilis\Controller\Deployer:html');
+$app->get(ADMIN_PATH.'html'			, '\Sensibilis\Controller\Deployer:html');
+$app->get(ADMIN_PATH.'{site}/html'			, '\Sensibilis\Controller\Deployer:html');
 
 $app->get(ADMIN_PATH.'sitemap'	, '\Sensibilis\Controller\Deployer:todo');
 

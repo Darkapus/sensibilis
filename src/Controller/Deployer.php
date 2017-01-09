@@ -13,6 +13,8 @@ class Deployer
    }
    
    public function html(Request $request, Response $response, $args){
+   		\Sensibilis\Model\Service\Site::requireConfiguration($args);
+   	
    		$mds = \Sensibilis\Model\Service\Markdown::listAll();
    		
    		$settings = $this->app->get('settings')['renderer'];
@@ -28,6 +30,9 @@ class Deployer
    			if(strpos($mdpath, '.md') ===false) continue; // only markdown files
    			
    			$args = \Sensibilis\Model\Service\Markdown::parseToArgs(file_get_contents($mdpath));
+   			
+   			// do not deploy html if the content is a draft
+   			if(array_key_exists('draft', $args) && $args['draft'] == true) continue;
    			
    			mkdir(HTML_PATH.$args['path'], 0777, true);
    			

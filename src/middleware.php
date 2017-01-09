@@ -1,7 +1,9 @@
 <?php
 $app->add(function ($request, $response, $next) {
 	if($request->isPost() && $request->getParam('login') == LOGIN && $request->getParam('password') == PASSWD) {
+		header('Location: '.$_SERVER['HTTP_REFERER']);
 		$_SESSION['needlog'] = false;
+		exit;
 	}
 	
 	// on verifie si loggé
@@ -20,6 +22,5 @@ $app->add(function ($request, $response, $next) {
 		header('Location: '.ADMIN_PATH.'edit?path='.$_SERVER['REQUEST_URI']);
 		exit;
 	}
-	
 	return $response;
 });
