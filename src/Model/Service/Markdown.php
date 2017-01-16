@@ -19,6 +19,8 @@ class Markdown{
 	        }
 	    }
 
+		
+
 	    return $results;
 	}
 	
@@ -74,6 +76,7 @@ class Markdown{
 	    	}
 	    }
 	    
+	    $args['body'] = $content;
 	    $args['content'] = self::toHtml($content);
 	    
 	    return $args;

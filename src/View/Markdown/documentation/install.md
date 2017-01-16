@@ -1,6 +1,6 @@
 ---
 draft: false
-path: /documentation/install/nginx
+path: /documentation/install
 site: sensibilis
 type: documentation
 

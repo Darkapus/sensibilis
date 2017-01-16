@@ -13,15 +13,34 @@ class Editor
    }
    
    public function form(Request $request, Response $response, $args){
+   		if(array_key_exists('user', $_SESSION) && !in_array($args['site'], $_SESSION['user']['access'])){
+   			echo 'impossible';
+   			exit;
+   		}
+   	
    		\Sensibilis\Model\Service\Site::requireConfiguration($args);
    		
-   		$args = array_merge($args, \Sensibilis\Model\Service\Markdown::parseToArgs(file_get_contents(MARKDOWN_PATH.$request->getParam('path', HOME_PATH).'.md')));
+   		$page = new \Sensibilis\Model\Document\Page(MARKDOWN_PATH.$request->getParam('path', HOME_PATH).'.md');
+   		
+   		$args = $page->getHeaders();
+   		
+   		$args['markdown'] = $page->getMarkdown();
+   		
+   		$today = new \DateTime();
    		
    		if(!$args['markdown']){
-   			$args['markdown'] = '---'.PHP_EOL.'draft: true'.PHP_EOL.'path: '.$request->getParam('path').PHP_EOL.'site: '.$args['site'].PHP_EOL.PHP_EOL.'---';
+   			$args['markdown'] = '---'.PHP_EOL.'created: '.$today->format('Y-m-d H:i:s').PHP_EOL.'draft: true'.PHP_EOL.'path: '.$request->getParam('path').PHP_EOL.'site: '.$args['site'].PHP_EOL.PHP_EOL.'---';
    		}
    		
-   		$args['sites'] = \Sensibilis\Model\Service\Site::listConfiguration();
+   		if($_SESSION['user']){
+   			$args['sites'] = $_SESSION['user']['access'];
+   		}
+   		else{
+   			$args['sites'] = \Sensibilis\Model\Service\Site::listConfiguration();
+   		}
+   		
+   		$args['files'] = \Sensibilis\Model\Service\Site::listMarkdown();
+   		
    		$this->app->view->render($response, 'editor.html', $args);
    		return $response;
    }

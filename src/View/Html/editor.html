@@ -12,13 +12,13 @@
 				<ul class="nav navbar-nav">
 					<li><a href="#" onclick="$('form').submit()">Save</a></li>
 					<li><a href="{{ constant('SITE_URL') }}{{ path }}">See</span></a></li>
-					<li><a href="#" onclick="$.ajax({url:'{{ constant('ADMIN_PATH') }}html'})">Deploy</span></a></li>
+					<li><a href="#" onclick="$.ajax({url:'{{ constant('ADMIN_PATH') }}{{ site }}/html'})">Deploy</span></a></li>
 					<li class="dropdown"><a type="button" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					    Manage <span class="caret"></span>
 					  </a>
 					  <ul class="dropdown-menu">
 					  	{% for confsite in sites %}
-					    <li><a href="#">{{ confsite }}</a></li>
+					    <li><a href="{{ constant('ADMIN_URL') }}{{ constant('ADMIN_PATH') }}{{ confsite }}/edit">{{ confsite }}</a></li>
 					    {% endfor %}
 					  </ul>
 					</li>
@@ -30,21 +30,31 @@
 	      	</div><!-- /.navbar-collapse -->
 		</div><!-- /.container-fluid -->
 		</nav>
-		<div class="container">
+		<header class="site-header">
+			<div class="site-title">
+			<a href="/">Sensibilis</a>
+			</div>
+			<div class="site-slogan">A static website generator</div>
+		</header>
+		<article class="container-fluid">
+			<div class="col-md-3"><table class="table">
+				{% for file in files %}
+					<tr><td ><a href="?path={{ file }}">{{ file }}</a></td></tr>
+				{% endfor %}
+			</table></div>
+			<div class="container col-md-9">
+				<form class="main-content" method="POST" action="{{ constant('ADMIN_PATH') }}edit">
+				
+				<textarea id="content" name="content">{{ markdown }}</textarea>
+				
+				</form>
+				
+				<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+				<link rel="stylesheet" href="/static/simplemde/dist/simplemde.min.css">
+				<script src="/static/simplemde/dist/simplemde.min.js"></script>
+			</div>
 			
-			<article class="container">
-			<form class="main-content" method="POST" action="{{ constant('ADMIN_PATH') }}edit">
-			
-			<textarea id="content" name="content">{{ markdown }}</textarea>
-			
-			</form>
-			
-			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
-			<link rel="stylesheet" href="/static/simplemde/dist/simplemde.min.css">
-			<script src="/static/simplemde/dist/simplemde.min.js"></script>
-			</article>
-			
-		</div>
+		</article>
 <script>
 	new SimpleMDE({
 		element: document.getElementById("content"),

@@ -1,13 +1,12 @@
-<body>
 	{% if forkme %}
-	<a href="{{ forkme }}" class="fork-me-on-github"><img src="/static/image/forkme.png" ></a>
+	<a href="{{ forkme }}" class="fork-me-on-github"><img src="/image/forkme.png" ></a>
 	{% endif %}
 	<nav class="navbar navbar-default navbar-fixed-top">
 	<div class="container-fluid">
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		<div class="container">
 			<div class="navbar-header">
-	            <a class="logo-top" href="/" data-toggle="tooltip" data-placement="bottom" title="Sensibilis"><img src="/static/image/phoenix.png" width="50" alt="Sensibilis"/></a>
+	            <a class="logo-top" href="/" data-toggle="tooltip" data-placement="bottom" title="Sensibilis"><img src="/image/phoenix.png" width="50" alt="Sensibilis"/></a>
 	        </div>
 			<ul class="nav navbar-nav" stop id="listActions">
 				<li><a><span class="glyphicon glyphicon-camera"></span></a></li>
@@ -21,27 +20,10 @@
       	</div><!-- /.navbar-collapse -->
 	</div><!-- /.container-fluid -->
 	</nav>
-	<article class="container">
-		{% if path %}
-		<ol class="breadcrumb">
-		{% for p in path|split('/') %}
-		{% if p %}
-		<li><a href="#">{{ p }}</a></li>
-		{% endif %}
-		{% endfor %}
-		</ol>
-		{% endif %}
-		<div class="col-md-12" id="content">
-			<header>
-				<h1>{{ title }}</h1>
-				{% if author %}
-					<em>Par {{author}}</em>
-				{% endif %}
-				<hr>
-				{{ content|raw }}
-			</header>
-
-			{{ include('footer.html') }}
+	
+	<header class="site-header">
+		<div class="site-title">
+		<a href="/">Sensibilis</a>
 		</div>
-	</article>
-</body>
+		<div class="site-slogan">A static website generator</div>
+	</header>
