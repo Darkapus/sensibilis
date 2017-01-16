@@ -1,0 +1,20 @@
+<!DOCTYPE HTML>
+<html lang="en-EN" xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+    {{ include('template/sensibilis/head.html') }}
+    </head>
+    <body>
+    {{ include('template/sensibilis/header.html') }}
+    <article class="container">
+    	<div class="col-md-2">
+    		<div  class="thumbnail">
+    			<img src="{{ constant('ADMIN_URL') }}/icon{{path}}">
+    		</div>
+    	</div>
+    	<div class="col-md-10">
+    	{{ include('template/sensibilis/body.html') }}
+    	</div>
+    </article>
+    {{ include('template/sensibilis/footer.html') }}
+    </body>
+</html>

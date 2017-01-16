@@ -7,6 +7,9 @@ $app->get('/', function (Request $request, Response $response, $args) {
 });
 
 
+
+$app->get('/icon/user/{string}'			, '\Sensibilis\Controller\Image:icon');
+
 // outils de gestion de contenu md
 $app->get(ADMIN_PATH.'edit'			, '\Sensibilis\Controller\Editor:form');
 $app->get(ADMIN_PATH.'{site}/edit'			, '\Sensibilis\Controller\Editor:form');

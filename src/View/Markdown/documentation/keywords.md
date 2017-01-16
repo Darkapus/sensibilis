@@ -5,46 +5,46 @@ site: sensibilis
 ---
 
 Markdown variables are stored / wrote at the top of your document :
-<pre>
----
-title: Sensibilis - Static Flexible CMS - Markdown Online edition
-author: Benjamin Baschet
-forkme: https://github.com/Darkapus/sensibilis
-showMarkdown: true
-path: /home
 
----
-</pre>
+	---
+	title: Sensibilis - Static Flexible CMS - Markdown Online edition
+	author: Benjamin Baschet
+	forkme: https://github.com/Darkapus/sensibilis
+	showMarkdown: true
+	path: /home
+
+	---
+
 
 - first occurence before " : " is the key
 - second occurence after " : " is the value
 
 Example :
-<pre>
-stringkey: stringvalue
-</pre>
+
+	stringkey: stringvalue
+
 
 > **true** and **false** string are considered as boolean value
 
 - if there is no occurence after " : ", that mean the value will be an array. To compose an array, need to start by " - "
 
 Example :
-<pre>
-arraykey:
-	- arrayvalue1
-	- arrayvalue2
-	- arrayvalue3
-</pre>
+
+	arraykey:
+		- arrayvalue1
+		- arrayvalue2
+		- arrayvalue3
+
 
 All variable will be transfer to your twig document
-<pre>
-// for example
-&lt;html&gt;
-&lt;body&gt;
-Hello my name is {{ stringkey }}
-&lt;/body&gt;
-&lt;/html&gt;
-</pre>
+
+	// for example
+	&lt;html&gt;
+	&lt;body&gt;
+	Hello my name is {{ stringkey }}
+	&lt;/body&gt;
+	&lt;/html&gt;
+
 
 | Keyword | Mandatory | Used For |
 | -------- | -------- | -------- |

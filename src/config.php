@@ -2,7 +2,7 @@
 
 define('ADMIN_PATH'		, '/admin/');
 
-define('ADMIN_URL'		, 'https://manager.sensibilis.fr');
+define('ADMIN_URL'		, 'https://manager.sensibilis.me');
 
 define('LOGIN'			, 'admin');
 define('PASSWD'			, 'admin');
