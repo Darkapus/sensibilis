@@ -6,8 +6,3 @@ type: documentation
 
 ---
 
-## Single site
-
-{{markdown]}
-
-## Multi sites

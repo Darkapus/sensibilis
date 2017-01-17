@@ -16,8 +16,15 @@
 			<hr>
 		{% endif %}
 		{% endif %}
-		{{ content|raw }}
+		
 	</header>
+	
+	{% if category %}
+		{{ category|raw }}
+	{% endif %}
+	
+	{{ include(template_from_string(content)) }}
+	
 	<footer>
 		{% if tags %}
 		Tags : 
@@ -30,6 +37,21 @@
 		<pre><code class="Markdown">{{ markdown }}</code></pre>
 		{% endif %}
 		<hr>
+		{% if showChilds %}
+		<div class="row">
+			{% for child in page.getChildren() %}
+			{% if child.getHeader('draft')==false %}
+			<dl class="col-md-10 bs-callout bs-callout-info">
+				<dt><a href="{{ child.getHeader('path') }}">{{ child.getHeader('title') }}</a></dt>
+				{% if child.getHeader('description') %}
+				<dd>{{ child.getHeader('description') }}</dd>
+				{% endif %}
+			</dl>
+			{% endif %}
+			{% endfor %}
+		</div>
+		<hr>
+		{% endif %}
 		
 		{% if disqus == true %}
 		<script id="dsq-count-scr" src="//benjaminbaschet.disqus.com/count.js" async></script>

@@ -8,19 +8,17 @@ showMarkdown: true
 type: documentation
 sidebar:
   markdown: /documentation/menu
+showChilds: true
 
 ---
 
+> The web tends towards - **full static fronts**, soliciting a minimum servers. Thus the costs of the contents are greatly reduced because the "**safety**" aspect of the rubles is no longer to be managed.
 
-
-> The web tends towards full static fronts, soliciting a minimum servers. Thus the costs of the contents are greatly reduced because the "safety" aspect of the rubles is no longer to be managed.
-
-Sensibilis is for you if **you are sensitive to** what we are spending our time for it:
+Sensibilis is made for you if - **you are sensitive to** - what we are spending our time for it:
 
 - Security
 - Speed
 - Readable
-- Few technical work
 - SEO
 - External backup (like dropbox)
 

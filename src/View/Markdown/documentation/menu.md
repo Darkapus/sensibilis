@@ -9,13 +9,12 @@ site: sensibilis
 
 ### Get Started
 
-- Introduction
-- Philosophy
-- Architecture
+- [Introduction](/documentation)
+- [Philosophy](/documentation/philosophy)
+- [Architecture](/documentation/architecture)
 
 ### Self hosting
 
-- Install with AWS S3
 - Install with NGINX
 - Install with APACHE
 

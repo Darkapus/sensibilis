@@ -1,6 +1,8 @@
 ---
 path: /documentation/keywords
 site: sensibilis
+title: Manage your variables
+description: Learn to Manage your variables, Markdown variables are stored / wrote at the top of your document
 
 ---
 

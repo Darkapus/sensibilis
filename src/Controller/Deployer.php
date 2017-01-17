@@ -23,12 +23,13 @@ class Deployer
 		$twig = new \Twig_Environment($loader, array(
 		    /*'cache' => $settings['template_cache'],*/
 		));
+		$twig->addExtension(new \Twig_Extension_StringLoader());
 		
    		$pages = \Sensibilis\Model\Service\Site::listAllPage();
    		
    		foreach($pages as $page){
    			$args		= $page->getHeaders();
-   			var_dump($args);
+   			
    			
    			// do not deploy html if the content is a draft
    			if(array_key_exists('draft', $args) && $args['draft'] == true){
@@ -62,8 +63,10 @@ class Deployer
    			
    			//var_dump($args);
    			
-   			$args['markdown'] = $page->getBody();
-   			$args['content'] = $page->getHtml();
+   			$args['markdown'] 	= $page->getBody();
+   			$args['content'] 	= $page->getHtml();
+   			
+   			$args['page']		= $page;
    			
    			$html = $template->render($args);
    			

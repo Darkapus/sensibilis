@@ -8,6 +8,7 @@ class Page {
 	protected $headers;
 	protected $markdown;
 	protected $body;
+	
 	public function __construct($mdpath, Page $extends = null) {
 		$this->path = $mdpath;
 		$this->setMarkdown(file_get_contents($mdpath));
@@ -16,11 +17,29 @@ class Page {
 		// extends
 		$this->parse();
 		
-		if($extends){
+		if(!is_null($extends)){
+			$this->setParent($extends);
 			$this->addHeaders($extends->getHeaders());
 		}
 	}
 	
+	protected $parent;
+	public function setParent($parent){
+		$parent->addChild($this);
+		$this->parent = $parent;
+		return $this;
+	}
+	public function getParent(){
+		return $this->parent;
+	}
+	protected $children;
+	public function addChild($child){
+		$this->children[] = $child;
+		return $this;
+	}
+	public function getChildren(){
+		return $this->children;
+	}
 	
 	public function getPath(){
 		return $this->path;
