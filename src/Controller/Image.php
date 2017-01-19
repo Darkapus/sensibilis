@@ -15,6 +15,6 @@ class Image
    public function icon(Request $request, Response $response, $args){
    	    $identicon = new \Identicon\Identicon();
    	    $identicon->displayImage($args['string']);
-   	    exit;
+   	    return $response;
    }
 }
