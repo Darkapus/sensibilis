@@ -37,11 +37,14 @@
 			<div class="site-slogan">A static website generator</div>
 		</header>
 		<article class="container-fluid">
-			<div class="col-md-3"><table class="table">
-				{% for file in files %}
-					<tr><td ><a href="?path={{ file }}">{{ file }}</a></td></tr>
+			<div class="col-md-3 well">
+				<ul class="nav nav-list">
+				{% for page in pages %}
+					{% set vars = {'page': page} %}
+					{% include 'tree.html' with vars %}
 				{% endfor %}
-			</table></div>
+				</ul>
+			</div>
 			<div class="container col-md-9">
 				<form class="main-content" method="POST" action="{{ constant('ADMIN_PATH') }}edit">
 				
@@ -60,7 +63,16 @@
 		element: document.getElementById("content"),
 		spellChecker: false,
 	});
+	$('.tree-toggle').click(function () {
+		$(this).parent().children('ul.tree').toggle(200);
+	});
+	$(function(){
+	$('.tree-toggle').parent().children('ul.tree').toggle(200);
+	})
 	
+	$(function () {
+	  $('[data-toggle="popover"]').popover({trigger:'hover'})
+	})
 	</script>
 
 	</body>

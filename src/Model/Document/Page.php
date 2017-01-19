@@ -34,7 +34,8 @@ class Page {
 	}
 	protected $children;
 	public function addChild($child){
-		$this->children[] = $child;
+		$this->children[$child->getHeader('updated')] = $child;
+		krsort($this->children);
 		return $this;
 	}
 	public function getChildren(){
@@ -110,52 +111,37 @@ class Page {
 			}
 		}
 		
+		// markdown update time
+		$headers['updated'] = date("Y-m-d H:i:s", filemtime($this->getPath()));
+		
+		$start_date = new \DateTime($headers['updated']);
+		$since_start = $start_date->diff(new \DateTime());
+		
+		$since = '';
+		
+		if($since_start->y){
+			$since = $since_start->y.' years';
+		}
+		elseif($since_start->m){
+			$since = $since_start->m.' months';
+		}
+		elseif($since_start->d){
+			$since = $since_start->d.' days';
+		}
+		elseif($since_start->h){
+			$since = $since_start->h.' hours';
+		}
+		elseif($since_start->i){
+			$since = $since_start->i.' minutes';
+		}
+		elseif($since_start->s){
+			$since = $since_start->s.' seconds';
+		}
+		$headers['since'] = $since;
+		
 		$this->setHeaders($headers);
 		
 		return $this;
-		
-		
-		$args = [];
-		$md = $this->getMarkdown();
-		
-		preg_match_all("/-{3}(.*?)-{3}(.*)/s", $md, $total);
-    	
-    	$tbl = explode(PHP_EOL, $total[1][0]);
-	    
-	    $this->setBody($total[2][0]);
-	    
-	    $content = '';
-	    
-	    $stop = -1;
-	    
-	    foreach($tbl as $row){
-	    	$row = trim($row);
-	    	$pos = strpos($row, ':');
-	    	
-	    	if($pos !==false) {
-		    	$key = trim(substr($row,0,$pos));
-		    	$value = trim(substr($row,$pos+1));	
-		    	
-		    	if(substr($value,0, 9) == 'Markdown('){
-		    		$page = new Page(MARKDOWN_PATH.substr($value,9, strlen($value)-10).'.md');
-		    		$value = $page->getHtml();
-		    	}
-		    	if(!$value)	$value = [];
-		    	if($value === 'true') $value = true;
-	    		if($value === 'false') $value = false;
-	    		
-	    		$args[$key] = $value;
-	    	}
-	    	elseif(substr($row,0,1)=='-' && isset($key)) {
-	    		$args[$key][] = trim(substr($row,1));
-	    		continue;
-	    	}
-	    }
-	    
-	    $this->setHeaders($args);
-	    
-	    return $this;
-	
 	}
 	
 }

@@ -5,6 +5,7 @@ title: Our philosophy
 path: /documentation/philosophy
 site: sensibilis
 showMarkdown: false
+description: "Our philosophy: Security, Speed, Readable, SEO, Backup"
 
 ---
 
@@ -25,10 +26,7 @@ showMarkdown: false
 
 > Speed, security, readable, customizable ... 
 
-## External resources (images)
 
-> There are a lot of services which give sharable files. Use this for files / images etc ...
-
-## External backup
+## Backup
 
 > The better way to backup is to save away from the content's server

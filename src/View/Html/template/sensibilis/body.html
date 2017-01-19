@@ -37,15 +37,18 @@
 		<pre><code class="Markdown">{{ markdown }}</code></pre>
 		{% endif %}
 		<hr>
-		{% if showChilds %}
+		{% if showChildren %}
 		<div class="row">
 			{% for child in page.getChildren() %}
 			{% if child.getHeader('draft')==false %}
 			<dl class="col-md-10 bs-callout bs-callout-info">
 				<dt><a href="{{ child.getHeader('path') }}">{{ child.getHeader('title') }}</a></dt>
-				{% if child.getHeader('description') %}
-				<dd>{{ child.getHeader('description') }}</dd>
-				{% endif %}
+				<dd>
+					{% if child.getHeader('description') %}
+					{{ child.getHeader('description') }}
+					{% endif %}<br>
+					<small>Last update: {{ child.getHeader('updated') }}</small>
+				</dd>
 			</dl>
 			{% endif %}
 			{% endfor %}

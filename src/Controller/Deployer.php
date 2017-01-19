@@ -32,15 +32,16 @@ class Deployer
    			
    			
    			// do not deploy html if the content is a draft
-   			if(array_key_exists('draft', $args) && $args['draft'] == true){
-   				$page->deleteHtml();
-   				continue;
-   			} 
    			if(array_key_exists('delete', $args) && $args['delete'] == true) {
    				$page->deleteHtml();
    				$page->deleteMarkdown();
    				continue;
    			}
+   			if(array_key_exists('draft', $args) && $args['draft'] == true){
+   				$page->deleteHtml();
+   				continue;
+   			} 
+   			
    			$template 	= $args['site'];
    			$type		= 'index';
    			

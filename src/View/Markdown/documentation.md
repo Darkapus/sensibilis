@@ -8,7 +8,7 @@ showMarkdown: true
 type: documentation
 sidebar:
   markdown: /documentation/menu
-showChilds: true
+showChildren: true
 
 ---
 
@@ -26,7 +26,7 @@ Sensibilis is made for you if - **you are sensitive to** - what we are spending 
 ## Definition of CMS
 Content Management System (CMS) is a vague term, any software manages a content. More precisely we give this name to a software that manages the creation and publication of documents, possibly in a collaborative way.
 
-## Easy management
+## Easy to manage
 With Sensibilis, it is possible to manage content and push it anywhere.
 
 > The markdown is a easy and readable language that can translate into HTML. In addition, it takes less disk space than content managed by wysiwyg.

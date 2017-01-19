@@ -51,9 +51,20 @@ class Site{
 				$extends = $pages[$lastPage];
 			}
 			
-			$pages[$path] = new \Sensibilis\Model\Document\Page(MARKDOWN_PATH.$path.'.md', $extends);
+			$page = new \Sensibilis\Model\Document\Page(MARKDOWN_PATH.$path.'.md', $extends);
+			$pages[$path] = $page;
 		}
-		return $pages;
+		
+		$pagesPath = $pages;
+		$pagesUpdate = [];
+		
+		foreach($pagesPath as $page){
+			$pagesUpdate[$page->getHeader('updated').'_'.uniqid()] = $page;
+		}
+		
+		krsort($pagesUpdate);
+		
+		return $pagesUpdate;
 	}
 	
 	public static function listMarkdown(){

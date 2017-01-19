@@ -228,3 +228,31 @@ pre {
     margin: 20px 0;
     padding: 20px;
 }
+
+.conseil{
+	top:0;
+	position: absolute;
+	left: -30px;
+}
+.popover{
+	width: 300px;
+}
+
+.nav-list .divider {
+    background-color: #e5e5e5;
+    border-bottom: 1px solid #ffffff;
+    height: 1px;
+    margin: 9px 1px;
+    overflow: hidden;
+}
+
+.nav-list {
+    margin-bottom: 0;
+    padding-left: 15px;
+}
+/*
+body>.container{
+	background-color: #fafafa;
+	border-radius: 10px;
+	padding: 10px;
+}*/

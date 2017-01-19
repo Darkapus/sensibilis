@@ -3,7 +3,8 @@ use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
 
 $app->get('/', function (Request $request, Response $response, $args) {
-    return $this->view->render($response, 'article.html', \Sensibilis\Model\Service\Markdown::parseToArgs(file_get_contents(MARKDOWN_PATH . HOME_PATH . '.md')));
+    header('Location: '.ADMIN_PATH.DEFAULT_CONF.'/edit');
+    exit;
 });
 
 

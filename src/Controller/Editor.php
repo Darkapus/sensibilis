@@ -41,6 +41,18 @@ class Editor
    		
    		$args['files'] = \Sensibilis\Model\Service\Site::listMarkdown();
    		
+   		$pages = \Sensibilis\Model\Service\Site::listAllPage();
+   		
+   		$pageWithoutParent = [];
+   		
+   		foreach($pages as $p){
+   			if(!$p->getParent()){
+   				$pageWithoutParent[] = $p;
+   			}
+   		}
+   		
+   		$args['pages'] = $pageWithoutParent;
+   		
    		$this->app->view->render($response, 'editor.html', $args);
    		return $response;
    }

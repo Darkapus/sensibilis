@@ -1,0 +1,15 @@
+<li style="position: relative">
+	<a href="?path={{ page.getHeader('path') }}" data-toggle="popover" title="{{ page.getHeader('title') }}" data-content="{{ page.getHeader('description') }}">
+		<b>{{ page.getHeader('title') }}</b><br>
+		<small>Last update: {{ page.getHeader('since') }}</small>
+	</a>
+	{% if page.getChildren() %}
+	<span style="position: absolute; left:-20px; top:10px; cursor:pointer;" class="tree-toggle glyphicon glyphicon-plus"></span>
+	<ul class="nav nav-list tree">
+		{% for child in page.getChildren() %}
+			{% set vars = {'page': child} %}
+			{% include 'tree.html' with vars %}
+		{% endfor %}
+	</ul>
+	{% endif %}
+</li>

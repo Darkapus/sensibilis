@@ -3,14 +3,14 @@ created: 2017-01-16 12:28:01
 draft: true
 path: /category
 site: sensibilis
-title: Not found
+title: Top for index
 showMarkdown: false
 
 ---
 
 <div class="row section">
     <div class="col-md-3 slim-button-wrapper">
-        <a href="/blog" class="slim-button"><i class="fa fa-photo" aria-hidden="true"></i><span>Choose a template</span></a>
+        <a href="/documentation" class="slim-button"><i class="fa fa-photo" aria-hidden="true"></i><span>Choose a template</span></a>
     </div>
     
     <div class="col-md-3 slim-button-wrapper">

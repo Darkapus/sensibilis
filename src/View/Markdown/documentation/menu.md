@@ -3,6 +3,7 @@ created: 2017-01-16 12:33:33
 draft: true
 path: /documentation/menu
 site: sensibilis
+title: Menu for documentation
 
 ---
 
