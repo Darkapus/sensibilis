@@ -4,18 +4,18 @@ namespace Sensibilis\Model\Service;
 
 class Site{
 	public static function requireConfiguration(&$args = []){
-		if(!array_key_exists('site', $args)){
-			$args['site'] = DEFAULT_CONF;
-   			require CONF_DIR . DEFAULT_CONF . '.conf.php';
+		$toRequire = CONF_DIR . DEFAULT_CONF . '.conf.php';
+		
+		if(array_key_exists('site', $args)){
+			$toRequire = CONF_DIR . $args['site'] . '.conf.php';
    		}
-   		else{
-   			require CONF_DIR . $args['site'] . '.conf.php';
-   		}
+   		
+   		require $toRequire;
 	}
 	public static function getDirFiles($dir, &$results = array()){
 	    $files = scandir($dir);
 	
-	    foreach($files as $key => $value){
+	    foreach($files as $value){
 	        $path = realpath($dir.DIRECTORY_SEPARATOR.$value);
 	        if(!is_dir($path)) {
 	        	$path = str_replace(CONF_DIR		, '', $path);

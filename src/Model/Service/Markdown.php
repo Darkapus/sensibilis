@@ -2,14 +2,14 @@
 namespace Sensibilis\Model\Service;
 
 class Markdown{
-	public static function toHtml($md){
-		return \Michelf\MarkdownExtra::defaultTransform($md);
+	public static function toHtml($markdown){
+		return \Michelf\MarkdownExtra::defaultTransform($markdown);
 	}
 	
 	public static function getDirFiles($dir, &$results = array()){
 	    $files = scandir($dir);
 	
-	    foreach($files as $key => $value){
+	    foreach($files as $value){
 	        $path = realpath($dir.DIRECTORY_SEPARATOR.$value);
 	        if(!is_dir($path)) {
 	            $results[] = $path;
@@ -28,12 +28,12 @@ class Markdown{
 		return self::getDirFiles(MARKDOWN_PATH);
 	}
 	
-	public static function parseToArgs($md){
+	public static function parseToArgs($markdown){
 		$args = [];
     	
-	    $args['markdown'] = $md;
+	    $args['markdown'] = $markdown;
 	    
-	    $tbl = explode(PHP_EOL, $md);
+	    $tbl = explode(PHP_EOL, $markdown);
 	    
 	    $content = '';
 	    
