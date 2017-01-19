@@ -73,6 +73,7 @@ class Deployer
    			
    			file_put_contents(HTML_PATH.$args['path'].'/index.html', $html);
    		}
-   		exit;
+   		
+   		return $response;
    }
 }

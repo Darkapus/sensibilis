@@ -14,8 +14,8 @@ class Editor
    
    public function form(Request $request, Response $response, $args){
    		if(array_key_exists('user', $_SESSION) && !in_array($args['site'], $_SESSION['user']['access'])){
-   			echo 'impossible';
-   			exit;
+   			$response->write('impossible');
+   			return $response;
    		}
    	
    		\Sensibilis\Model\Service\Site::requireConfiguration($args);
