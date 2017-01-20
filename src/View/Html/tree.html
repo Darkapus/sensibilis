@@ -1,15 +1,17 @@
-<li style="position: relative">
+<li class="nav-item" style="position: relative">
 	<a href="?path={{ page.getHeader('path') }}" data-toggle="popover" title="{{ page.getHeader('title') }}" data-content="{{ page.getHeader('description') }}">
 		<b>{{ page.getHeader('title') }}</b><br>
 		<small>Last update: {{ page.getHeader('since') }}</small>
 	</a>
 	{% if page.getChildren() %}
-	<span style="position: absolute; left:-20px; top:10px; cursor:pointer;" class="tree-toggle glyphicon glyphicon-plus"></span>
-	<ul class="nav nav-list tree">
+	<i style="position: absolute; left:-20px; top:10px; cursor:pointer;" class="tree-toggle fa fa-plus" aria-hidden="true"></i>
+	<ul class="nav flex-column tree">
 		{% for child in page.getChildren() %}
 			{% set vars = {'page': child} %}
 			{% include 'tree.html' with vars %}
 		{% endfor %}
 	</ul>
+	{% else %}
+	<i style="position: absolute; left:-20px; top:10px; cursor:pointer;" class="fa fa-file-code-o" aria-hidden="true"></i>
 	{% endif %}
 </li>

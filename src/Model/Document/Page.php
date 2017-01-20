@@ -82,7 +82,12 @@ class Page {
 		return $this->body;
 	}
 	public function getHtml(){
-		return \Michelf\MarkdownExtra::defaultTransform($this->getBody());
+		$html = \Michelf\MarkdownExtra::defaultTransform($this->getBody());
+		
+		$html = preg_replace("/\[([^:\/]+):([^\]]+)\]/", '<$1 class="$2">', $html);
+		$html = preg_replace("/\[\/(.+?)\]/", '</$1>', $html);
+		
+		return $html;
 	}
 	
 	public function deleteMarkdown(){

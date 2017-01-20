@@ -151,19 +151,19 @@ a:-webkit-any-link {
 }
 Inherited from body
 html, body {
-    font-size: 16px;
-    line-height: 24px;
+    /*font-size: 16px;
+    line-height: 24px;*/
 }
 body {
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-    font-size: 14px;
+    /*font-size: 14px;*/
     line-height: 1.42857143;
     color: #333;
     background-color: #fff;
 }
 
 html {
-    font-size: 10px;
+    /*font-size: 10px;*/
     -webkit-tap-highlight-color: transparent;
 }
 
@@ -186,7 +186,11 @@ pre {
 	padding: 0px;
 }
 
+button{
+	cursor: pointer;
+}
 
+/*
 .btn{
 	
     border-radius: 3px;
@@ -205,7 +209,7 @@ pre {
     vertical-align: middle;
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
 }
-
+*/
 
 .btn:hover, .btn:focus {
     box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.16), 0 10px 10px 0 rgba(0, 0, 0, 0.12);
@@ -228,6 +232,9 @@ pre {
     margin: 20px 0;
     padding: 20px;
 }
+.bs-callout-danger {
+    border-left-color: #ce4844;
+}
 
 .conseil{
 	top:0;
@@ -246,10 +253,23 @@ pre {
     overflow: hidden;
 }
 
-.nav-list {
+.nav.flex-column {
     margin-bottom: 0;
     padding-left: 15px;
 }
+
+
+.hovercat{
+        cursor:pointer;
+        padding: 5px;
+        transition: all 1s;
+        border-radius: 10px;
+}
+.hovercat:hover{
+        box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.16), 0 10px 10px 0 rgba(0, 0, 0, 0.12);
+        background-color:white;
+}
+
 /*
 body>.container{
 	background-color: #fafafa;

@@ -2,62 +2,54 @@
 <html lang="fr-FR" xmlns="http://www.w3.org/1999/xhtml" itemtype="http://schema.org/Article">
 	{{ include('head.html') }}
 	<body>
-		<nav class="navbar navbar-default navbar-fixed-top">
-		<div class="container-fluid">
-			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-			<div class="container">
-				<div class="navbar-header">
-		            <a class="logo-top" href="/" data-toggle="tooltip" data-placement="bottom" title="Sensibilis"><img src="/static/image/phoenix.png" width="50" alt="Sensibilis"/></a>
-		        </div>
-				<ul class="nav navbar-nav">
-					<li><a href="#" onclick="$('form').submit()">Save</a></li>
-					<li><a href="{{ constant('SITE_URL') }}{{ path }}">See</span></a></li>
-					<li><a href="#" onclick="$.ajax({url:'{{ constant('ADMIN_PATH') }}{{ site }}/html'})">Deploy</span></a></li>
-					<li class="dropdown"><a type="button" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					    Manage <span class="caret"></span>
-					  </a>
-					  <ul class="dropdown-menu">
-					  	{% for confsite in sites %}
-					    <li><a href="{{ constant('ADMIN_URL') }}{{ constant('ADMIN_PATH') }}{{ confsite }}/edit">{{ confsite }}</a></li>
-					    {% endfor %}
-					  </ul>
-					</li>
-				</ul>
-				<form class="navbar-form">
-					
-				</form>
-			</div>
-	      	</div><!-- /.navbar-collapse -->
-		</div><!-- /.container-fluid -->
-		</nav>
 		<header class="site-header">
-			<div class="site-title">
-			<a href="/">Sensibilis</a>
-			</div>
-			<div class="site-slogan">A static website generator</div>
+			<h1 class="display-1 text-center">
+				<a href="/">Sensibilis</a>
+			</h1>
+			<p class="lead text-center text-muted">A static website generator</p>
 		</header>
-		<article class="container-fluid">
-			<div class="col-md-3 well">
-				<ul class="nav nav-list">
+		
+		<div class="container-fluid row">
+			<div class="col-3 well">
+				<ul class="nav flex-column sticky-top">
 				{% for page in pages %}
 					{% set vars = {'page': page} %}
 					{% include 'tree.html' with vars %}
 				{% endfor %}
 				</ul>
 			</div>
-			<div class="container col-md-9">
+			<div class="col-9">
+				<div class="btn-toolbar sticky-top" role="toolbar" aria-label="Toolbar with button groups">
+					<div class="btn-group mr-2" role="group" aria-label="starGroup">
+						<button class="btn btn-primary" onclick="$('form').submit()">Save</button>
+						<button class="btn btn-primary" onclick="location.href='{{ constant('SITE_URL') }}{{ path }}'">See</button>
+						<button class="btn btn-primary" onclick="$.ajax({url:'{{ constant('ADMIN_PATH') }}{{ site }}/html'})">Deploy</button>
+					</div>
+					<div class="btn-group  float-right" role="group" aria-label="starGroup">
+						<div class="dropdown">
+						  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						    Manage
+						  </button>
+						  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+						  	{% for confsite in sites %}
+						    <a class="dropdown-item" href="{{ constant('ADMIN_URL') }}{{ constant('ADMIN_PATH') }}{{ confsite }}/edit">{{ confsite }}</a>
+						    {% endfor %}
+						  </div>
+						</div>
+					</div>
+				</div>
 				<form class="main-content" method="POST" action="{{ constant('ADMIN_PATH') }}edit">
 				
 				<textarea id="content" name="content">{{ markdown }}</textarea>
 				
 				</form>
-				
 				<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
 				<link rel="stylesheet" href="/static/simplemde/dist/simplemde.min.css">
 				<script src="/static/simplemde/dist/simplemde.min.js"></script>
 			</div>
 			
-		</article>
+		</div>
+		
 <script>
 	new SimpleMDE({
 		element: document.getElementById("content"),

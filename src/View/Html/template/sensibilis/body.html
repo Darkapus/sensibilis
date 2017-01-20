@@ -38,19 +38,34 @@
 		{% endif %}
 		<hr>
 		{% if showChildren %}
-		<div class="row">
+		<div class="row well">
 			{% for child in page.getChildren() %}
+			<div class="col-md-6 hovercat" onclick="location.href='{{ child.getHeader('path') }}'">
 			{% if child.getHeader('draft')==false %}
-			<dl class="col-md-10 bs-callout bs-callout-info">
+			<div class="col-md-2">
+				<a href="{{ child.getHeader('path') }}">
+				{% if child.getHeader('icon') %}
+				<i class="text-info fa fa-{{ child.getHeader('icon') }}" style="font-size: 3em;" aria-hidden="true"></i>
+				{% else %}
+					{% if child.getChildren() %}
+					<i class="text-info fa fa-folder" style="font-size: 3em;" aria-hidden="true"></i>
+					{% else %}
+					<i class="text-info fa fa-file" style="font-size: 3em;" aria-hidden="true"></i>
+					{% endif %}
+				{% endif %}
+				</a>
+			</div>
+			<dl class="col-md-10">
 				<dt><a href="{{ child.getHeader('path') }}">{{ child.getHeader('title') }}</a></dt>
 				<dd>
 					{% if child.getHeader('description') %}
 					{{ child.getHeader('description') }}
 					{% endif %}<br>
-					<small>Last update: {{ child.getHeader('updated') }}</small>
+					<small>-- {{ child.getHeader('updated') }}</small>
 				</dd>
 			</dl>
 			{% endif %}
+			</div>
 			{% endfor %}
 		</div>
 		<hr>

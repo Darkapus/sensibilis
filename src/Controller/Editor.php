@@ -66,7 +66,7 @@ class Editor
 		// recursive directory creation
 		$path = $args['path'];
 		
-		if($path){
+		if($path && !file_exists(MARKDOWN_PATH.$path)){
 			mkdir(MARKDOWN_PATH.$path, 0777, true);
 		}
 		
