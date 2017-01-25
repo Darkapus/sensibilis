@@ -1,25 +1,23 @@
 	{% if forkme %}
 	<a href="{{ forkme }}" class="fork-me-on-github"><img src="/image/forkme.png" ></a>
 	{% endif %}
-	<nav class="navbar navbar-default navbar-fixed-top">
-	<div class="container-fluid">
-		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-		<div class="container">
-			<div class="navbar-header">
-	            <a class="logo-top" href="/" data-toggle="tooltip" data-placement="bottom" title="Sensibilis"><img src="/image/phoenix.png" width="50" alt="Sensibilis"/></a>
-	        </div>
-			<ul class="nav navbar-nav" stop id="listActions">
-				<li><a><span class="glyphicon glyphicon-camera"></span></a></li>
-				<li><a><span class="glyphicon glyphicon-education"></span></a></li>
-				<li><a><span class="glyphicon glyphicon-leaf"></span></a></li>
-			</ul>
-			<ul class="nav navbar-nav navbar-right" >
-            	<li><a href="{{ constant('ADMIN_URL') }}{{ constant('ADMIN_PATH') }}{{ site }}/edit?path={{ path }}"><span class="glyphicon glyphicon-log-in"></span></a></li>
-            </ul>
-		</div>
-      	</div><!-- /.navbar-collapse -->
-	</div><!-- /.container-fluid -->
+	
+	
+
+    
+    
+	<nav class="container navbar navbar-toggleable-md navbar-light bg-faded">
+	  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+	    <span class="navbar-toggler-icon"></span>
+	  </button>
+	  <a class="navbar-brand" href="#">Benjamin Baschet</a>
+	  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+	    <div class="navbar-nav">
+			<a class="nav-item nav-link" href="{{ constant('ADMIN_URL') }}{{ constant('ADMIN_PATH') }}{{ site }}/edit?path={{ path }}"><span class="fa fa-lock"></span></a>
+	    </div>
+	  </div>
 	</nav>
+	
 	
 	<header class="site-header">
 		<div class="site-title">

@@ -31,7 +31,6 @@ class Site{
 	    
 	    // order by string length
 		usort($results, function($a,$b){
-		    //return strlen($b)-strlen($a);
 		    // needed for extend
 		    return strlen($a) <=> strlen($b); // php 7
 		});

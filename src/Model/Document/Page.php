@@ -26,7 +26,7 @@ class Page {
 	}
 	
 	protected $parent;
-	public function setParent($parent){
+	public function setParent(Page $parent){
 		$parent->addChild($this);
 		$this->parent = $parent;
 		return $this;
@@ -35,7 +35,7 @@ class Page {
 		return $this->parent;
 	}
 	protected $children;
-	public function addChild($child){
+	public function addChild(Page $child){
 		$this->children[$child->getHeader('updated')] = $child;
 		krsort($this->children);
 		return $this;

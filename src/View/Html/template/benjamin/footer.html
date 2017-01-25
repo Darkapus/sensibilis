@@ -3,6 +3,42 @@
 	Content created with <a href="http://sensibilis.me">sensibis.me</a>
 	</div>
 </footer>
+
+<script>
 {% if highlight %}
-<script>hljs.initHighlightingOnLoad();</script>
+hljs.initHighlightingOnLoad();
+hljs.initLineNumbersOnLoad();
 {% endif %}
+$(function() {
+	$('blockquote').addClass('blockquote');
+	
+	if($('.sommaire') && !$('.sommaire').html()){
+	
+		var sommaire;
+		var cptSommaire = 0;
+		$('.sommaire').append('<ul></ul>');
+		var cptStart = 0;
+		
+		$(':header').each(function(){
+			cptSommaire++;
+			switch($(this).prop("tagName")){
+				case 'H2':
+					$(this).attr('id', 'somm'+cptSommaire);
+					$('.sommaire ul').append('<li><a href="#somm'+cptSommaire+'">'+$(this).html()+'</a></li>');
+					break;
+				case 'H3':
+					$(this).attr('id', 'somm'+cptSommaire);
+					$('.sommaire ul').append('<li><a href="#somm'+cptSommaire+'"><i class="fa fa-level-up fa-rotate-90" aria-hidden="true"></i>  '+$(this).html()+'</a></li>');
+					break;
+			}
+			
+		});
+	}
+	
+	$('.sommaire ul').addClass('list-group');
+	$('.sommaire ul').addClass('nav nav-pills flex-column');
+	$('.sommaire ul').addClass('sticky-top');
+	$('.sommaire ul li').addClass('nav-item');
+	$('.sommaire ul li a').addClass('nav-link d-block w-100');
+});
+</script>
