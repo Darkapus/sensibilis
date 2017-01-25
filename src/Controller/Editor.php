@@ -13,12 +13,17 @@ class Editor
    }
    
    public function form(Request $request, Response $response, $args){
-   		if(array_key_exists('user', $_SESSION) && !in_array($args['site'], $_SESSION['user']['access'])){
+   		$session 	= $request->getAttribute('session'); //get the session from the request
+   		$services 	= $request->getAttribute('services');
+   	
+   		$serviceSite = $services->get('Site');
+   	
+   		if(array_key_exists('user', $session) && !in_array($args['site'], $session['user']['access'])){
    			$response->write('impossible');
    			return $response;
    		}
    	
-   		\Sensibilis\Model\Service\Site::requireConfiguration($args);
+   		$serviceSite::requireConfiguration($args);
    		
    		$page = new \Sensibilis\Model\Document\Page(MARKDOWN_PATH.$request->getParam('path', HOME_PATH).'.md');
    		
@@ -32,16 +37,16 @@ class Editor
    			$args['markdown'] = '---'.PHP_EOL.'created: '.$today->format('Y-m-d H:i:s').PHP_EOL.'draft: true'.PHP_EOL.'path: '.$request->getParam('path').PHP_EOL.'site: '.$args['site'].PHP_EOL.PHP_EOL.'---';
    		}
    		
-   		if($_SESSION['user']){
-   			$args['sites'] = $_SESSION['user']['access'];
+   		if(array_key_exists('user', $session) && $session['user']){
+   			$args['sites'] = $session['user']['access'];
    		}
    		else{
-   			$args['sites'] = \Sensibilis\Model\Service\Site::listConfiguration();
+   			$args['sites'] = $serviceSite::listConfiguration();
    		}
    		
-   		$args['files'] = \Sensibilis\Model\Service\Site::listMarkdown();
+   		$args['files'] = $serviceSite::listMarkdown();
    		
-   		$pages = \Sensibilis\Model\Service\Site::listAllPage();
+   		$pages = $serviceSite::listAllPage();
    		
    		$pageWithoutParent = [];
    		
@@ -59,9 +64,13 @@ class Editor
    
    public function save(Request $request, Response $response, $args){
    		$content = $request->getParam('content');
-		$args = \Sensibilis\Model\Service\Markdown::parseToArgs($content);
+   		$services 			= $request->getAttribute('services');
+   		$serviceSite 		= $services->get('Site');
+   		$serviceMarkdown 	= $services->get('Markdown');
+   		
+		$args = $serviceMarkdown::parseToArgs($content);
 		
-		\Sensibilis\Model\Service\Site::requireConfiguration($args);
+		$serviceSite::requireConfiguration($args);
 		
 		// recursive directory creation
 		$path = $args['path'];

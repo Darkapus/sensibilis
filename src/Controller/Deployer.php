@@ -13,9 +13,13 @@ class Deployer
    }
    
    public function html(Request $request, Response $response, $args){
+   		$services 			= $request->getAttribute('services');
+   		$serviceSite 		= $services->get('Site');
+   		$serviceMarkdown 	= $services->get('Markdown');
+   	
    		// config required to deploy
    		// seams site var is not interesting
-   		\Sensibilis\Model\Service\Site::requireConfiguration($args);
+   		$serviceSite::requireConfiguration($args);
    		
    		// twig template prepare
    		$settings = $this->app->get('settings')['renderer'];
@@ -25,7 +29,7 @@ class Deployer
 		));
 		$twig->addExtension(new \Twig_Extension_StringLoader());
 		
-   		$pages = \Sensibilis\Model\Service\Site::listAllPage();
+   		$pages = $serviceSite::listAllPage();
    		
    		foreach($pages as $page){
    			$args		= $page->getHeaders();
