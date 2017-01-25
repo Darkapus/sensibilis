@@ -11,5 +11,3 @@ access:
 link: http://www.bootply.com/lE2NPpERdt
 
 ---
-
-Salut Benjamin !
