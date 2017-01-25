@@ -17,17 +17,11 @@ title: Menu for documentation
 ### Self hosting
 
 - Install with NGINX
-- Install with APACHE
 
 ### Tutorial
 
-- For designer
-- For integrator
-- For blogger
-- Markdown
+- [Markdown](/documentation/markdown)
 
-### Concepts
-### Configuration
 ### Variables
 
 - Reserved variables
@@ -35,3 +29,6 @@ title: Menu for documentation
 - Inheritance of variables
 
 ### Templates
+
+- Make your own template
+- Choose an existing template

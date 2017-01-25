@@ -11,8 +11,10 @@ class Page {
 	
 	public function __construct($mdpath, Page $extends = null) {
 		$this->path = $mdpath;
-		$this->setMarkdown(file_get_contents($mdpath));
 		
+		if(file_exists($mdpath)) {
+			$this->setMarkdown(file_get_contents($mdpath));
+		}
 		// parse se header
 		// extends
 		$this->parse();
@@ -82,7 +84,12 @@ class Page {
 		return $this->body;
 	}
 	public function getHtml(){
-		return \Michelf\MarkdownExtra::defaultTransform($this->getBody());
+		$html = \Michelf\MarkdownExtra::defaultTransform($this->getBody());
+		
+		$html = preg_replace("/\[([^:\"\/\s]+):([^\]]+)\]/", '<$1 class="$2">', $html);
+		$html = preg_replace("/\[\/(.+?)\]/", '</$1>', $html);
+		
+		return $html;
 	}
 	
 	public function deleteMarkdown(){
@@ -102,17 +109,24 @@ class Page {
 		
 		$headers = Yaml::parse($total[1][0]);
 		
-		foreach($headers as $key=>$header) {
-			if(is_array($header) && array_key_exists('markdown', $header)) {
-				$value = $header['markdown'];
-				$markdownfile = MARKDOWN_PATH.$value.'.md';
-				$page = new Page($markdownfile);
-				$headers[$key] = $page->getHtml();
-			}
+		if($headers) {
+			foreach($headers as $key=>$header) {
+				if(is_array($header) && array_key_exists('markdown', $header)) {
+					$value = $header['markdown'];
+					$markdownfile = MARKDOWN_PATH.$value.'.md';
+					$page = new Page($markdownfile);
+					$headers[$key] = $page->getHtml();
+				}
+			}	
+		}
+		else{
+			// need to inform user parsing error
 		}
 		
 		// markdown update time
-		$headers['updated'] = date("Y-m-d H:i:s", filemtime($this->getPath()));
+		if(file_exists($this->getPath())) {
+			$headers['updated'] = date("Y-m-d H:i:s", filemtime($this->getPath()));
+		}
 		
 		$start_date = new \DateTime($headers['updated']);
 		$since_start = $start_date->diff(new \DateTime());

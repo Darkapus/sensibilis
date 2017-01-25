@@ -59,9 +59,9 @@ class Deployer
    				$args['site'] = DEFAULT_CONF;
    			}
    			
-   			
-   			mkdir(HTML_PATH.$args['path'], 0777, true);
-   			
+   			if(!file_exists(HTML_PATH.$args['path'])){
+   				mkdir(HTML_PATH.$args['path'], 0777, true);
+   			}
    			//var_dump($args);
    			
    			$args['markdown'] 	= $page->getBody();
