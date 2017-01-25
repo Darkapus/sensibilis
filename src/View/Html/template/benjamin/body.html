@@ -3,17 +3,20 @@
 {% for p in path|split('/') %}
 {% if p %}
 {% set purl = purl ~ '/' ~ p %}
-<li><a href="{{purl}}">{{ p }}</a></li>
+<li class="breadcrumb-item"><a href="{{purl}}">{{ p }}</a></li>
 {% endif %}
 {% endfor %}
 </ol>
 {% endif %}
-<div class="col-md-12" id="content">
+<article id="content">
 	<header>
-		{% if title %}<h1>{{ title }}</h1>
+		{% if title %}<h1 class="">{{ title }}</h1>
 		{% if author %}
 			<em>by <a href="/user/{{author}}">{{author}}</a></em>
 			<hr>
+		{% endif %}
+		{% if lead %}
+		<div class="lead">{{ lead }}</div>
 		{% endif %}
 		{% endif %}
 		
@@ -23,8 +26,20 @@
 		{{ category|raw }}
 	{% endif %}
 	
-	{{ include(template_from_string(content)) }}
 	
+	{% if sommaire %}
+		<div class="row">
+			<div class="col">
+				<div class="hidden-lg-up sommaire"></div>
+				{{ include(template_from_string(content)) }}
+			</div>
+			<div class="col-3 hidden-md-down card">
+				<div class="sommaire card-block"></div>
+			</div>
+		</div>
+	{% else %}
+		{{ include(template_from_string(content)) }}
+	{% endif %}
 	<footer>
 		{% if tags %}
 		Tags : 
@@ -38,35 +53,41 @@
 		{% endif %}
 		<hr>
 		{% if showChildren %}
-		<div class="row well">
+		<div class="jumbotron">
+			<div class="container">
+		<div class="row">
 			{% for child in page.getChildren() %}
-			<div class="col-md-6 hovercat" onclick="location.href='{{ child.getHeader('path') }}'">
-			{% if child.getHeader('draft')==false %}
-			<div class="col-md-2">
-				<a href="{{ child.getHeader('path') }}">
-				{% if child.getHeader('icon') %}
-				<i class="text-info fa fa-{{ child.getHeader('icon') }}" style="font-size: 3em;" aria-hidden="true"></i>
-				{% else %}
-					{% if child.getChildren() %}
-					<i class="text-info fa fa-folder" style="font-size: 3em;" aria-hidden="true"></i>
-					{% else %}
-					<i class="text-info fa fa-file" style="font-size: 3em;" aria-hidden="true"></i>
-					{% endif %}
+			<div class="col-6 hovercat" onclick="location.href='{{ child.getHeader('path') }}'">
+				{% if child.getHeader('draft')==false %}
+				<div class="row">
+					<div class="col-2">
+						<a href="{{ child.getHeader('path') }}">
+						{% if child.getHeader('icon') %}
+						<i class="text-info fa fa-{{ child.getHeader('icon') }}" style="font-size: 3em;" aria-hidden="true"></i>
+						{% else %}
+							{% if child.getChildren() %}
+							<i class="text-info fa fa-folder" style="font-size: 3em;" aria-hidden="true"></i>
+							{% else %}
+							<i class="text-info fa fa-file" style="font-size: 3em;" aria-hidden="true"></i>
+							{% endif %}
+						{% endif %}
+						</a>
+					</div>
+					<dl class="col-10">
+						<dt><a href="{{ child.getHeader('path') }}">{{ child.getHeader('title') }}</a></dt>
+						<dd>
+							{% if child.getHeader('description') %}
+							{{ child.getHeader('description') }}
+							{% endif %}<br>
+							<span class="badge badge-info">{{ child.getHeader('updated') }}</span>
+						</dd>
+					</dl>
+				</div>
 				{% endif %}
-				</a>
-			</div>
-			<dl class="col-md-10">
-				<dt><a href="{{ child.getHeader('path') }}">{{ child.getHeader('title') }}</a></dt>
-				<dd>
-					{% if child.getHeader('description') %}
-					{{ child.getHeader('description') }}
-					{% endif %}<br>
-					<small>-- {{ child.getHeader('updated') }}</small>
-				</dd>
-			</dl>
-			{% endif %}
 			</div>
 			{% endfor %}
+		</div>
+		</div>
 		</div>
 		<hr>
 		{% endif %}
@@ -93,4 +114,4 @@
 		{% endif %}	
 	
 	</footer>
-</div>
+</article>

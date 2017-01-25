@@ -37,11 +37,10 @@ $app->add(function ($request, $response, $next) {
 				}
 			}
 			
-			exit;
+			return $response;
 		}
 	}
 	
-	//$route = explode('/', str_replace(ADMIN_PATH, '', $request->getUri()->getPath()));
 	
 	// on verifie si loggé
 	if(!array_key_exists('needlog', $_SESSION)) {
@@ -49,8 +48,7 @@ $app->add(function ($request, $response, $next) {
 	}
 	
 	if(
-		($_SESSION['needlog'] && strpos($_SERVER['REQUEST_URI'], ADMIN_PATH) !== false) /*||
-		(array_key_exists('user', $_SESSION) && strpos($_SERVER['REQUEST_URI'], ADMIN_PATH) !== false && !in_array($route[0], $_SESSION['user']['access']))*/
+		($_SESSION['needlog'] && strpos($_SERVER['REQUEST_URI'], ADMIN_PATH) !== false) 
 	) {
 		session_destroy();
 		$this->get('view')->render($response, 'login.html');
@@ -62,7 +60,7 @@ $app->add(function ($request, $response, $next) {
 	
 	if($response->getStatusCode() == '404') {
 		header('Location: '.ADMIN_PATH.'edit?path='.$_SERVER['REQUEST_URI']);
-		exit;
+		return $response;
 	}
 	return $response;
 });

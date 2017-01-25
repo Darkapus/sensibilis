@@ -4,7 +4,7 @@ use \Psr\Http\Message\ResponseInterface as Response;
 
 $app->get('/', function (Request $request, Response $response, $args) {
     header('Location: '.ADMIN_PATH.DEFAULT_CONF.'/edit');
-    exit;
+    return $response;
 });
 
 

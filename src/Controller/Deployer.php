@@ -16,8 +16,7 @@ class Deployer
    		$services 			= $request->getAttribute('services');
    		$services 			= $request->getAttribute('services');
    		$serviceSite 		= $services->get('Site');
-   		$serviceMarkdown 	= $services->get('Markdown');
-   	
+   		
    		// config required to deploy
    		// seams site var is not interesting
    		$serviceSite::requireConfiguration($args);
@@ -37,12 +36,12 @@ class Deployer
    			
    			
    			// do not deploy html if the content is a draft
-   			if(array_key_exists('delete', $args) && $args['delete'] == true) {
+   			if(array_key_exists('delete', $args)===true && $args['delete'] == true) {
    				$page->deleteHtml();
    				$page->deleteMarkdown();
    				continue;
    			}
-   			if(array_key_exists('draft', $args) && $args['draft'] == true){
+   			if(array_key_exists('draft', $args)===true && $args['draft'] == true){
    				$page->deleteHtml();
    				continue;
    			} 
@@ -50,24 +49,20 @@ class Deployer
    			$template 	= $args['site'];
    			$type		= 'index';
    			
-   			/*if(array_key_exists('template', $args)){
-   				$template = $args['template'];
-   			}*/
-   			if(array_key_exists('type', $args)){
+   			if(array_key_exists('type', $args)===true){
    				$type = $args['type'];
    			}
    			
    			
    			$template = $twig->load('template/'.$template.'/'.$type.'.html');
    			
-   			if(!array_key_exists('site', $args)) {
+   			if(array_key_exists('site', $args)===false) {
    				$args['site'] = DEFAULT_CONF;
    			}
    			
-   			if(!file_exists(HTML_PATH.$args['path'])){
+   			if(file_exists(HTML_PATH.$args['path'])===false){
    				mkdir(HTML_PATH.$args['path'], 0777, true);
    			}
-   			//var_dump($args);
    			
    			$args['markdown'] 	= $page->getBody();
    			$args['content'] 	= $page->getHtml();
