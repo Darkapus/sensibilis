@@ -3,7 +3,7 @@
 $container = $app->getContainer();
 
 // view renderer
-$container['renderer'] = function ($container) {
+$container['renderer'] = function (\Slim\Container $container) {
     $settings = $container->get('settings')['renderer'];
     
     $twig = new Slim\Views\Twig($settings['template_path']);
@@ -12,7 +12,7 @@ $container['renderer'] = function ($container) {
 };
 
 // monolog
-$container['logger'] = function ($container) {
+$container['logger'] = function (\Slim\Container $container) {
     $settings = $container->get('settings')['logger'];
     $logger = new Monolog\Logger($settings['name']);
     $logger->pushProcessor(new Monolog\Processor\UidProcessor());
@@ -22,7 +22,7 @@ $container['logger'] = function ($container) {
 
 
 // Register component on container
-$container['view'] = function ($container) {
+$container['view'] = function (\Slim\Container $container) {
 	$settings = $container->get('settings')['renderer'];
 	
     $view = new \Slim\Views\Twig($settings['template_path'], [
