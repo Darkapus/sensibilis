@@ -64,6 +64,7 @@ class Editor
    
    public function save(Request $request, Response $response, $args){
    		$content = $request->getParam('content');
+
    		$services 			= $request->getAttribute('services');
    		$serviceSite 		= $services->get('Site');
    		$serviceMarkdown 	= $services->get('Markdown');
