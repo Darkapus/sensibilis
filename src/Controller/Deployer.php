@@ -14,6 +14,7 @@ class Deployer
    
    public function html(Request $request, Response $response, $args){
    		$services 			= $request->getAttribute('services');
+   		$services 			= $request->getAttribute('services');
    		$serviceSite 		= $services->get('Site');
    		$serviceMarkdown 	= $services->get('Markdown');
    	
