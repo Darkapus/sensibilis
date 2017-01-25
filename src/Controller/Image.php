@@ -13,8 +13,10 @@ class Image
    }
    
    public function icon(Request $request, Response $response, $args){
+	if(isset($request)){
    	    $identicon = new \Identicon\Identicon();
    	    $identicon->displayImage($args['string']);
-   	    return $response;
+	}
+	return $response;
    }
 }
