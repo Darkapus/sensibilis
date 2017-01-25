@@ -1,5 +1,9 @@
 <?php
 $app->add(function ($request, $response, $next) {
+	// push the session
+	$request = $request->withAttribute('session', $_SESSION);
+	$request = $request->withAttribute('services', \Sensibilis\Model\Service\Factory::getInstance());
+	
 	if($request->isPost()) {
 		
 		if($request->getParam('login') && $request->getParam('password')){
@@ -49,7 +53,7 @@ $app->add(function ($request, $response, $next) {
 		(array_key_exists('user', $_SESSION) && strpos($_SERVER['REQUEST_URI'], ADMIN_PATH) !== false && !in_array($route[0], $_SESSION['user']['access']))*/
 	) {
 		session_destroy();
-		$this->view->render($response, 'login.html');
+		$this->get('view')->render($response, 'login.html');
 	}
 	else{
 		$response = $next($request, $response);

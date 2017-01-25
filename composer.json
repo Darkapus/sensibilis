@@ -8,7 +8,9 @@
         "slim/twig-view": "^2.1",
         "michelf/php-markdown": "^1.7",
         "yzalis/identicon": "^1.1",
-        "symfony/yaml": "^3.2"
+        "symfony/yaml": "^3.2",
+        "rollbar/rollbar": "^0.18.2",
+        "league/container": "^2.2"
     },
     "autoload": {
         "psr-4": {"Sensibilis\\": "src/"}
