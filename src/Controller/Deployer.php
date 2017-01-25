@@ -13,7 +13,10 @@ class Deployer
    }
    
    public function html(Request $request, Response $response, $args){
+<<<<<<< HEAD
    		$services 			= $request->getAttribute('services');
+=======
+>>>>>>> 15ef4230c94a224ef3835f06bb044fdfb86945c8
    		$serviceSite 		= $services->get('Site');
    		$serviceMarkdown 	= $services->get('Markdown');
    	
