@@ -1,6 +1,6 @@
 {
     "minimum-stability": "stable",
-    "name": "Sensibilis",
+    "name": "darkapus/sensibilis",
     "description": "A static website generator",
     "require": {
 	"php": "^7.0",
