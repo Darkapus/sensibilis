@@ -21,18 +21,26 @@
 			<div class="col-9">
 				<div class="btn-toolbar sticky-top" role="toolbar" aria-label="Toolbar with button groups">
 					<div class="btn-group mr-2" role="group" aria-label="starGroup">
-						<button class="btn btn-primary" onclick="$('form').submit()">Save</button>
-						<button class="btn btn-primary" onclick="location.href='{{ constant('SITE_URL') }}{{ path }}'">See</button>
-						<button class="btn btn-primary" onclick="$.ajax({url:'{{ constant('ADMIN_PATH') }}{{ site }}/html'})">Deploy</button>
+						<button class="btn btn-primary" onclick="$('form').submit()">
+							<i class="fa fa-save" aria-hidden="true"></i> Save
+						</button>
+						<button class="btn btn-primary" onclick="location.href='{{ constant('SITE_URL') }}{{ path }}'">
+							<i class="fa fa-eye" aria-hidden="true"></i> See
+						</button>
+						<button class="btn btn-primary" onclick="$.ajax({url:'{{ constant('ADMIN_PATH') }}{{ site }}/html'})">
+							<i class="fa fa-send" aria-hidden="true"></i> Deploy
+						</button>
 					</div>
 					<div class="btn-group  float-right" role="group" aria-label="starGroup">
 						<div class="dropdown">
 						  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						    Manage
+						    <i class="fa fa-sign-language" aria-hidden="true"></i> Manage
 						  </button>
 						  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 						  	{% for confsite in sites %}
-						    <a class="dropdown-item" href="{{ constant('ADMIN_URL') }}{{ constant('ADMIN_PATH') }}{{ confsite }}/edit">{{ confsite }}</a>
+						    <a class="dropdown-item" href="{{ constant('ADMIN_URL') }}{{ constant('ADMIN_PATH') }}{{ confsite }}/edit">
+						    	{{ confsite }}
+ 							</a>
 						    {% endfor %}
 						  </div>
 						</div>

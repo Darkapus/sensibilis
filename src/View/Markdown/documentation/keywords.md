@@ -41,19 +41,20 @@ Example :
 All variable will be transfer to your twig document
 
 	// for example
-	&lt;html&gt;
-	&lt;body&gt;
-	Hello my name is {{ stringkey }}
-	&lt;/body&gt;
-	&lt;/html&gt;
+	<html>
+<body&gt;
+	Hello my name is {{ '{{stringkey}}' }}
+	</body>
+	</html>
 
 
 | Keyword | Mandatory | Used For |
 | -------- | -------- | -------- |
 | path     | Yes      | Needed to know the path for the url     |
-| site     | No    | Which configuration site to use  |
-| tags     | No    | tags are used to design your website with some link  |
-| draft     | No    | If draft equals to true, the document will not be published  |
+| site      | No        | Which configuration site to use  |
+| tags     | No       | tags are used to design your website with some link  |
+| draft     | No       | If draft equals to true, the document will not be published  |
+| delete  | No       | If delete equals to true, the document will be delete  |
 
 <script>
 $(document).ready(function(){$('table').addClass('table');})
